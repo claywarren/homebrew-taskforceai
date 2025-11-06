@@ -2,11 +2,19 @@
 # frozen_string_literal: true
 
 cask 'taskforceai' do
-  version '0.4.0'
-  sha256 'PLACEHOLDER_UNIVERSAL_DMG_SHA256' # This will be replaced by your CI/CD pipeline
+  version '0.2.0'
 
-  url "https://github.com/ClayWarren/grok4fastheavy/releases/download/v#{version}/TaskForceAI-#{version}.dmg",
-      verified: 'github.com/ClayWarren/grok4fastheavy/'
+  on_arm do
+    url 'https://taskforceai.chat/api/download/desktop/macos/latest',
+        verified: 'taskforceai.chat/'
+    sha256 '74bd6bbcf88a1095ae41dda9a03a98724dfd0c9a6f232284578b38f01ccd0ea6'
+  end
+
+  on_intel do
+    url 'https://taskforceai.chat/api/download/desktop/macos/latest',
+        verified: 'taskforceai.chat/'
+    sha256 '6f69eca1e86aa893da17c57c4dae09de2b13bf4a83dcec571d823dac48bed01b'
+  end
 
   name 'TaskForceAI'
   desc 'Desktop application for TaskForceAI'
@@ -17,13 +25,13 @@ cask 'taskforceai' do
   app 'TaskForceAI.app'
 
   # This bundle identifier should be verified from your tauri.conf.json
-  uninstall quit: 'com.taskforceai.app'
+  uninstall quit: 'com.taskforceai.desktop'
 
   zap trash: [
-    '~/Library/Application Support/com.taskforceai.app',
-    '~/Library/Caches/com.taskforceai.app',
-    '~/Library/Preferences/com.taskforceai.app.plist',
-    '~/Library/Saved Application State/com.taskforceai.app.savedState',
-    '~/Library/WebKit/com.taskforceai.app'
+    '~/Library/Application Support/com.taskforceai.desktop',
+    '~/Library/Caches/com.taskforceai.desktop',
+    '~/Library/Preferences/com.taskforceai.desktop.plist',
+    '~/Library/Saved Application State/com.taskforceai.desktop.savedState',
+    '~/Library/WebKit/com.taskforceai.desktop'
   ]
 end
