@@ -5,7 +5,7 @@
 class TaskforceaiCli < Formula
   desc 'Command-line interface for TaskForceAI'
   homepage 'https://taskforceai.chat'
-  version '0.4.0'
+  version "0.10.0"
   license 'MIT'
 
   on_macos do
