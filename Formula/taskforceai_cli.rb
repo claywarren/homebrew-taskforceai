@@ -10,11 +10,11 @@ class TaskforceaiCli < Formula
 
   on_macos do
     on_arm do
-      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.0/taskforceai-cli-arm64'
+      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.0/taskforceai-cli-darwin-arm64.tar.gz'
       sha256 'PLACEHOLDER_ARM64_SHA256' # This will be replaced by your CI/CD pipeline
     end
     on_intel do
-      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.0/taskforceai-cli-amd64'
+      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.0/taskforceai-cli-darwin-amd64.tar.gz'
       sha256 'PLACEHOLDER_AMD64_SHA256' # This will be replaced by your CI/CD pipeline
     end
   end
