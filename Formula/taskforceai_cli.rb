@@ -1,77 +1,40 @@
+# typed: false
+# frozen_string_literal: true
 
-          # typed: false
+class TaskforceaiCli < Formula
+  desc 'Command-line interface for TaskForceAI'
+  homepage 'https://taskforceai.chat'
+  version "0.11.0"
+  license 'MIT'
 
-          # frozen_string_literal: true
+  on_macos do
+    on_arm do
+      url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.0/taskforceai-cli-darwin-arm64.tar.gz"
+      sha256 "597f8968a9568b5723e9a8978a174c607c8cbc86bf86ce0282217197330b18e9"
+    end
+    on_intel do
+      url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.0/taskforceai-cli-darwin-amd64.tar.gz"
+      sha256 "af06f081281e71b2be02b04f6166a65f5ba8f68a3d5d836048cb7a10b4b61b45"
+    end
+  end
 
-          
+  on_linux do
+    on_arm do
+      url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.0/taskforceai-cli-linux-arm64.tar.gz"
+      sha256 "4830262eb3b483197197b5f5c1f1724851630bdfe5625722a58b5bbcabd4ff24"
+    end
+    on_intel do
+      url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.0/taskforceai-cli-linux-amd64.tar.gz"
+      sha256 "802dee5bd0f8d943880ca63550a6002101157f4885015d81d221f82765618241"
+    end
+  end
 
-          # Formula for the TaskForceAI CLI
-
-          class TaskforceaiCli < Formula
-
-            desc 'Command-line interface for TaskForceAI'
-
-            homepage 'https://taskforceai.chat'
-
-            version "0.10.1"
-
-            license 'MIT'
-
-          
-
-            on_macos do
-
-              on_arm do
-
-                url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.1/taskforceai-cli-darwin-arm64.tar.gz"
-
-                sha256 "91395d94b34fd5d676ee6df5c0131d00b2b0ca8a1ea9a168e125eb94a6f25068"
-
-              end
-
-              on_intel do
-
-                url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.1/taskforceai-cli-darwin-amd64.tar.gz"
-
-                sha256 "ca50be667742fdca9774f4336cb0f8712e2b7306dd9f4a7e636d32ed105ca7ad"
-
-              end
-
-            end
-
-          
-
-            on_linux do
-
-              on_arm do
-
-                url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.1/taskforceai-cli-linux-arm64.tar.gz"
-
-                sha256 "b1db58211e5c669c1e8086fa88004087dd424d068833784eab8c3e62e7c993e7"
-
-              end
-
-              on_intel do
-
-                url "https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.10.1/taskforceai-cli-linux-amd64.tar.gz"
-
-                sha256 "78c8345855f6f2aacf390402edcfe7eb063ee06a4c73e37ad2ae811eb8cf4965"
-
-              end
-
-            end
-
-          
-            def install
-    # The archive contains a single binary named taskforceai-os-arch
-    # We rename it to just "taskforceai" during installation
-    os = OS.mac? ? "darwin" : "linux"
-    arch = Hardware::CPU.arm? ? "arm64" : "amd64"
-    bin.install "taskforceai-#{os}-#{arch}" => "taskforceai"
+  def install
+    bin.install "taskforceai"
+    bin.install "taskforceai-app-server"
   end
 
   test do
-    # A simple test to check if the binary is executable and returns help output.
     assert_match 'Usage:', shell_output("#{bin}/taskforceai --help")
   end
 end
