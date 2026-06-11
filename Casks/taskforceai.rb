@@ -2,18 +2,18 @@
 # frozen_string_literal: true
 
 cask 'taskforceai' do
-  version '0.2.0'
+  version '0.4.9'
 
   on_arm do
-    url 'https://taskforceai.chat/api/download/desktop/macos/latest',
+    url "https://huvic5ygnwxzwlgj.public.blob.vercel-storage.com/desktop/macos/TaskForceAI-#{version}-arm64.dmg",
         verified: 'taskforceai.chat/'
-    sha256 '74bd6bbcf88a1095ae41dda9a03a98724dfd0c9a6f232284578b38f01ccd0ea6'
+    sha256 'e1b94baab008642897e433576a4b978fc5ca5ff5771e14025175a220d753dba2'
   end
 
   on_intel do
-    url 'https://taskforceai.chat/api/download/desktop/macos/latest',
+    url "https://huvic5ygnwxzwlgj.public.blob.vercel-storage.com/desktop/macos/TaskForceAI-#{version}-x64.dmg",
         verified: 'taskforceai.chat/'
-    sha256 '6f69eca1e86aa893da17c57c4dae09de2b13bf4a83dcec571d823dac48bed01b'
+    sha256 '9a144e108bfc9e8cc25f019d113e14c4ee23f88683d8bd76679926e63ac90fc6'
   end
 
   name 'TaskForceAI'
@@ -24,7 +24,6 @@ cask 'taskforceai' do
 
   app 'TaskForceAI.app'
 
-  # This bundle identifier should be verified from your tauri.conf.json
   uninstall quit: 'com.taskforceai.desktop'
 
   zap trash: [
