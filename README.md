@@ -34,3 +34,11 @@ To upgrade to the latest versions in the future, you can run:
 brew upgrade taskforceai-cli
 brew upgrade --cask taskforceai
 ```
+
+## Development
+
+Run the local checks before publishing formula or cask updates:
+
+```bash
+./run-checks.sh
+```

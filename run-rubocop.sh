@@ -1,9 +1,9 @@
 #!/bin/bash
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+set -euo pipefail
 
-# Change to the directory containing the Gemfile
-cd homebrew-taskforceai || exit 1
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+cd "$(dirname "$0")"
 
 # Collect arguments, stripping the "homebrew-taskforceai/" prefix
 declare -a RUBY_FILES
@@ -12,4 +12,8 @@ for file in "$@"; do
 done
 
 # Execute rubocop with the adjusted paths
-bundle exec rubocop "${RUBY_FILES[@]}"
+if [ "${#RUBY_FILES[@]}" -eq 0 ]; then
+  bundle exec rubocop
+else
+  bundle exec rubocop "${RUBY_FILES[@]}"
+fi
