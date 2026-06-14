@@ -4,34 +4,42 @@
 class TaskforceaiCli < Formula
   desc 'Command-line interface for TaskForceAI'
   homepage 'https://taskforceai.chat'
-  version '0.11.2'
+  version "0.11.3"
   license 'MIT'
 
   on_macos do
     on_arm do
-      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.2/taskforceai-cli-darwin-arm64.tar.gz'
-      sha256 'f06df5a1eb33a8fa55db6f4aa0198a397a9ea269985d88019ddd07aef0553eec'
+      url "https://github.com/ClayWarren/taskforceai-open/releases/download/v0.11.3/taskforceai-cli-darwin-arm64.tar.gz"
+      sha256 "710a18cff4f4bdee53ebec23b94f9d6d50a6c1ca21f77bca1396d02f11ff86c9"
     end
     on_intel do
-      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.2/taskforceai-cli-darwin-amd64.tar.gz'
-      sha256 '9c86863e0394ada0d476db3baa0f94ba5186ae9f77d3167aedca7e6ac6fae72a'
+      url "https://github.com/ClayWarren/taskforceai-open/releases/download/v0.11.3/taskforceai-cli-darwin-amd64.tar.gz"
+      sha256 "a0814dbd477fb37f2b8f2a177f6df9df71084c459fdb240351466dd4c8264582"
     end
   end
 
   on_linux do
     on_arm do
-      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.2/taskforceai-cli-linux-arm64.tar.gz'
-      sha256 '86201515c2df6cc7ebe65303deca51de852ff2de04306f30ae0929306e6a1125'
+      url "https://github.com/ClayWarren/taskforceai-open/releases/download/v0.11.3/taskforceai-cli-linux-arm64.tar.gz"
+      sha256 "ac98a20fbcd0802531c35743dfc3eb5a109131b7c7469877d8fbfbf18b18c065"
     end
     on_intel do
-      url 'https://github.com/ClayWarren/taskforceai-tui/releases/download/v0.11.2/taskforceai-cli-linux-amd64.tar.gz'
-      sha256 '4077c93e5ed10a75441019c49ae6bce433b21e85937fa4dbd59eff96d4fe2a26'
+      url "https://github.com/ClayWarren/taskforceai-open/releases/download/v0.11.3/taskforceai-cli-linux-amd64.tar.gz"
+      sha256 "0b55cb8e727e3d8f40954909a10615b0c0fbaead2e2c337e40d7802a5729a41a"
     end
   end
 
   def install
-    bin.install 'taskforceai'
-    bin.install 'taskforceai-app-server'
+    if OS.mac?
+      suffix = Hardware::CPU.arm? ? "darwin-arm64" : "darwin-amd64"
+    elsif OS.linux?
+      suffix = Hardware::CPU.arm? ? "linux-arm64" : "linux-amd64"
+    else
+      odie "Unsupported platform"
+    end
+
+    bin.install "taskforceai-#{suffix}" => "taskforceai"
+    bin.install "taskforceai-app-server-#{suffix}" => "taskforceai-app-server"
   end
 
   test do
